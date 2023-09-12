@@ -1,3 +1,9 @@
 2023/09/12
 reactinit
 サーバ構成を考えた．何とかなりそう
+やろうと思えば他にサーバを用意する必要もないかもしれない
+単語があるかどうかの判定は以下のサイトでやる
+https://sakura-paris.org/About/%E5%BA%83%E8%BE%9E%E8%8B%91%E7%84%A1%E6%96%99%E6%A4%9C%E7%B4%A2/changelog
+Socket.ioでできそう
+https://solutionware.jp/2017/11/25/socket-io%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E7%B0%A1%E5%8D%98%E3%81%AB%E3%83%81%E3%83%A3%E3%83%83%E3%83%88%E3%83%84%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B/
+何とかなるやろ
