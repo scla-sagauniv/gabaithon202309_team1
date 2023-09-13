@@ -13,3 +13,8 @@ https://solutionware.jp/2017/11/25/socket-io%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6
 何とか出来た
 dockerを使った方がいいのでファイル構成を変更
 CORSエラーの回避は面倒すね一応できたけども
+次はdockerに対応させる
+先にCOPYしておかないと駄目みたいね覚えておこう
+https://qiita.com/suzuki0430/items/fcf57968365d15419601
+できた
+

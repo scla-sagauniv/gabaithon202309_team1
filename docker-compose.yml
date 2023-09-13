@@ -1,0 +1,17 @@
+version: "3.0"
+services:
+  node:
+    build:
+      context: "room-server"
+    volumes:
+      - ./room-server:/usr/src/app
+    ports:
+      - "8080:8080/tcp"
+  react:
+    build:
+      context: "react-app"
+    volumes:
+      - ./react-app:/usr/src/app
+    ports:
+      - "3000:3000/tcp"
+  
