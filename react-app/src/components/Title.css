@@ -1,0 +1,33 @@
+.title_rectangle {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #000;
+    background-color: transparent;
+    position: absolute;
+    top: 100px;
+    left: 500px;
+}
+
+.title_str {
+    text-align: center;
+    font-size : 50px;
+}
+
+.title_eclipse {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: transparent;/*背景色*/
+  border : 2px solid orange;
+  position :absolute;
+  top : 180px;
+  left : 193px;
+}
+
+.display_click {
+    top : 450px;
+    text-align: center;
+    font-size : 50px;
+    position: absolute;
+    left : 300px;
+}
