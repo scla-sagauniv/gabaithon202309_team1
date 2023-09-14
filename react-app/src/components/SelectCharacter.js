@@ -1,14 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './SelectCharacter.css'
 
+// 微調整は頼んだ...
 function SelectCharacter() {
   return (
     <div>
-      <h1>戻る</h1>
       <div>
         <Link to="/SelectMode">
-          <button>モード選択画面へ</button>
+          <button className="backButton">←</button>
         </Link>
+      </div>
+      <div className="chaex_rectangle">
+        <p>強靭!無敵!最強!!!!!!!</p>
+      </div>
+      <div>
+        <img className="charImgPri" src="./img/nigaoe_leibniz.png"></img>
       </div>
     </div>
   );
