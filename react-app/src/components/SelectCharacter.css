@@ -8,11 +8,11 @@
 }
 
 .charImgPri {
-    width : 300px;
-    height : 350px;
-    position : absolute;
-    top : 50px;
-    left : 200px;
+    width : 280px;
+    height : 280px;
+    position : fixed;
+    top : 110px;
+    left : 130px;
 }
 
 .chaex_rectangle {
@@ -23,4 +23,47 @@
     position: absolute;
     top: 100px;
     left: 600px;
+}
+
+.cha2_rectangle {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #000;
+    background-color: transparent;
+    position: absolute;
+    top: 100px;
+    left: 120px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 列数を調整 */
+    gap: 10px; /* 列間の間隔を設定 */
+    position: absolute;
+    top :500px;
+    left : 500px;
+}
+
+.item1 {
+    width: 100px; /* 各要素の幅を設定 */
+    height: 100px; /* 各要素の高さを設定 */
+    background-color: #ccc;
+    background-image: url('../../public/img/nigaoe_leibniz.png');
+    background-size: cover;
+}
+
+.item2 {
+    width: 100px; /* 各要素の幅を設定 */
+    height: 100px; /* 各要素の高さを設定 */
+    background-color: #ccc;
+    background-image: url('../../public/img/nigaoe_michelangelo.png');
+    background-size : cover;
+}
+
+.item3 {
+    width: 100px; /* 各要素の幅を設定 */
+    height: 100px; /* 各要素の高さを設定 */
+    background-color: #ccc;
+    background-image: url('../../public/img/nigaoe_shibata_katsuie.png');
+    background-size : cover;
 }
