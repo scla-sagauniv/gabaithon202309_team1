@@ -6,7 +6,7 @@ const axios = require('axios');
 var app = express();
 
 var rooms = [];
-var temp_rooms = [];
+var player_queue = [];
 
 const socketOptions = {
     cors: {
@@ -46,21 +46,35 @@ io.on('connection', (socket) => {
         //console.log(io.socket.manager.rooms);
         
     })
-    socket.on('INTO_ROOM', function(data){
-        if (temp_rooms.length == 0){
+    socket.on('SERTCH_ROOM', function(data){
+        // 待っているプレイヤーがいるか判定
+        if (player_queue.length == 0){
             // roomid生成
             let room_id = crypto.randomUUID();
-            temp_rooms.push(room_id);
+            let new_room = {
+                player_id: socket.id,
+                room_id: room_id
+            }
+            player_queue.push(new_room);
             // room参加
             socket.join(room_id);
         } else {
-            let room_id = temp_rooms.pop();
-            // room参加
-            socket.join(room_id);
-            // ROOMIDを同じ部屋にいる2人に送る
-            io.to(room_id).emit('RECEIVE_ROOMID', {
-                room_id: room_id
-            })
+            let new_player = true;
+            // 同じプレイヤーのボタン押下を検知
+            for (let i = 0; i < player_queue.length; i++){
+                if (socket.id == player_queue[i].player_id){
+                    new_player = false;
+                }
+            }
+            if (new_player){
+                let queue = player_queue.shift();
+                // room参加
+                socket.join(queue.room_id);
+                // ROOMIDを同じ部屋にいる2人に送る
+                io.to(queue.room_id).emit('MOVE_ROOM', {
+                    room_id: queue.room_id
+                })
+            } 
         }
     })
     //dataの中にはplayerID, roomID, wordがある
