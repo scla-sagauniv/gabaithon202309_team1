@@ -16,6 +16,10 @@ class Chat extends React.Component{
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
         });
+        // ルームIDの受け取り
+        this.socket.on('RECEIVE_ROOMID', function(data){
+            localStorage.setItem('ROOM_ID', data.room_id);
+        });
 
         const addMessage = data => {
             console.log(data);
@@ -27,10 +31,15 @@ class Chat extends React.Component{
             ev.preventDefault();
             this.socket.emit('SEND_MESSAGE', {
                 author: this.state.username,
-                message: this.state.message
-            })
+                message: this.state.message,
+                room_id: localStorage.getItem('ROOM_ID')
+            });
             this.setState({message: ''});
+        }
 
+        this.enterTheRoom = ev => {
+            ev.preventDefault();
+            this.socket.emit('INTO_ROOM');
         }
     }
     render(){
@@ -57,6 +66,7 @@ class Chat extends React.Component{
                                 <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
                                 <br/>
                                 <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
+                                <button onClick={this.enterTheRoom} className="btn btn-primary form-control">EnterTheRoom</button>
                             </div>
                         </div>
                     </div>
