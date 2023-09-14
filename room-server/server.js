@@ -58,6 +58,7 @@ io.on('connection', (socket) => {
             player_queue.push(new_room);
             // room参加
             socket.join(room_id);
+        // バトルの開始
         } else {
             let new_player = true;
             // 同じプレイヤーのボタン押下を検知
@@ -68,11 +69,22 @@ io.on('connection', (socket) => {
             }
             if (new_player){
                 let queue = player_queue.shift();
+                let room_id = queue.room_id;
                 // room参加
-                socket.join(queue.room_id);
-                // ROOMIDを同じ部屋にいる2人に送る
-                io.to(queue.room_id).emit('MOVE_ROOM', {
-                    room_id: queue.room_id
+                socket.join(room_id);
+                // バトルの初期情報をまとめる
+                players = [queue.player_id, socket.id]
+                let battle_info = {
+                    room_id: room_id,
+                    players: players,
+                    turn: players[Math.floor(Math.random() * 2)],
+                    rules: []
+                }
+                // 情報を送る
+                io.to(room_id).emit('SEND_BATTLE_INFO', battle_info);
+                // 部屋の移動
+                io.to(room_id).emit('MOVE_ROOM', {
+                    room_id: room_id
                 })
             } 
         }

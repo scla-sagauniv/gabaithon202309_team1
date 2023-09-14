@@ -37,8 +37,10 @@ object型でゲームの推移を記録する
     players: [], // 参加しているプレイヤーID
     turn: string, // どのプレイヤーの番か
     history: [], // しりとりの履歴
+    rules: [] // ルール
 }
 これで足りるかな？
 roomsはsetオブジェクトらしい
 https://zenn.dev/oreo2990/articles/5ccc8323874560
 
+次は，ゲームの初期設定
