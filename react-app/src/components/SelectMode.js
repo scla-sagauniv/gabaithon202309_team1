@@ -1,9 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import io from "socket.io-client";
+import { Link, useNavigate } from 'react-router-dom';
 import './SelectMode.css';
 
 // リンク先はあとで実装
 function SelectMode() {
+
+  const navigate = useNavigate();
+  const socket = io('localhost:8080', { withCredentials: true });
+
+  socket.on("MOVE_ROOM", function(data){
+    navigate("/OneOnOne");
+  });
+
+  const clickOneOnOne = ev => {
+    socket.emit('SERTCH_ROOM');
+  }
+
   return (
     <div>
       <div>
@@ -28,9 +41,7 @@ function SelectMode() {
         </Link>
       </div>
       <div>
-        <Link to="/OneOnOne">
-          <button className="buttonOneOnOne">1 vs 1モードへ</button>
-        </Link>
+        <button className="buttonOneOnOne" onClick={clickOneOnOne}>1 vs 1モードへ</button>
       </div>
     </div>
   );
