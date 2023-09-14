@@ -15,6 +15,18 @@ const socketOptions = {
       }
 };
 
+// 広辞苑にあるか確かめる
+function checkWord(word){
+    fetch("https://sakura-paris.org/dict/?api=1&q=" + word + "&dict=広辞苑&type=2").then(function(res){
+        console.log(res);
+        console.log(res.length);
+        if (res.length == 0){
+            return false;
+        }
+        return true;
+    });
+}
+
 server = app.listen(8080, function(){
     console.log('server is running on port 8080')
 });
@@ -44,5 +56,11 @@ io.on('connection', (socket) => {
                 room_id: room_id
             })
         }
+    })
+    //dataの中にはplayerID, roomID, wordがある
+    socket.on('SEND_WORD', async function(data){
+        let test_word = "テスト";
+        let check = await checkWord(test_word);
+        console.log(check);
     })
 });
