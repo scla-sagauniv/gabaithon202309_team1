@@ -1,0 +1,85 @@
+.winner_text {
+    position : absolute;
+    top : 80px;
+    left : 250px;
+    font-size: 50px;
+}
+
+.cha_win_rectangle {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #000;
+    background-color: transparent;
+    position: absolute;
+    top: 200px;
+    left: 190px;
+}
+
+.cha_win_img {
+    width : 280px;
+    height : 280px;
+    position: relative;
+    top : 10px;
+    left : 10px;
+}
+
+.result {
+    width : 400px;
+    height : 380px;
+    position: absolute;
+    top : 100px;
+    left : 700px;
+    border-bottom: 15px solid black;
+}
+
+.result_top {
+    border-top: 15px solid black;
+    padding-top: 5px;
+    position : relative;
+    width : 100%;
+}
+
+.result_result {
+    width : 1em;
+    height : auto;
+    position : relative;
+    text-align: center;
+    font-size: 50px;
+    margin: 0;
+    letter-spacing: 45px;
+}
+
+.result_time {
+    width : 1em;
+    height : 50px;
+    position : relative;
+    font-size: 40px;
+    margin : 0;
+    top : 100px;
+    white-space: nowrap;
+}
+
+.result_rally {
+    width : 1em;
+    height : 50px;
+    position : relative;
+    top : 150px;
+    font-size: 40px;
+    margin : 0;
+    white-space: nowrap;
+}
+
+.button_tomenu1 {
+    width : 200px;
+    height : 80px;
+    position : absolute;
+    top : 550px;
+    left : 550px;
+}
+
+.button_tomenuforresult {
+    position :relative;
+    width : 100%;
+    height : 100%;
+    font-size: 20px;
+}
