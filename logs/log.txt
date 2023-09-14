@@ -44,3 +44,4 @@ roomsはsetオブジェクトらしい
 https://zenn.dev/oreo2990/articles/5ccc8323874560
 
 次は，ゲームの初期設定
+初期データはどうにかなったので受け取り
