@@ -1,6 +1,7 @@
 var express = require('express');
 var socket = require('socket.io');
 const crypto = require("crypto");
+const axios = require('axios');
 
 var app = express();
 
@@ -17,14 +18,19 @@ const socketOptions = {
 
 // 広辞苑にあるか確かめる
 function checkWord(word){
-    fetch("https://sakura-paris.org/dict/?api=1&q=" + word + "&dict=広辞苑&type=2").then(function(res){
-        console.log(res);
-        console.log(res.length);
-        if (res.length == 0){
-            return false;
-        }
-        return true;
-    });
+    return new Promise(resolve =>{
+        axios.get("https://sakura-paris.org/dict/?api=1&q=" + word + "&dict=広辞苑&type=2").then(function(res){
+            console.log(res.data);
+            console.log(res.data.length);
+            resolve(!Array.isArray(res.data));
+            /*
+            if (res.data.length == 0){
+                resolve(false);
+            }
+            resolve(true);
+            */
+        });
+    })
 }
 
 server = app.listen(8080, function(){
@@ -59,8 +65,8 @@ io.on('connection', (socket) => {
     })
     //dataの中にはplayerID, roomID, wordがある
     socket.on('SEND_WORD', async function(data){
-        let test_word = "テスト";
-        let check = await checkWord(test_word);
-        console.log(check);
+        console.log(data.word);
+        let check = await checkWord(data.word);
+        await console.log(check);
     })
 });

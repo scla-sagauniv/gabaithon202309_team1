@@ -12,7 +12,7 @@ class OneOnOne extends React.Component{
         messages: []
     };
 
-    this.socket = io('localhost:3000', { withCredentials: true });
+    this.socket = io('localhost:8080', { withCredentials: true });
 
     this.socket.on('RECEIVE_MESSAGE', function(data){
         addMessage(data);
@@ -28,11 +28,11 @@ class OneOnOne extends React.Component{
         console.log(this.state.messages);
     };
 
-    this.sendMessage = ev => {
+    this.sendWord = ev => {
         ev.preventDefault();
-        this.socket.emit('SEND_MESSAGE', {
+        this.socket.emit('SEND_WORD', {
             author: this.state.username,
-            message: this.state.message,
+            word: this.state.message,
             room_id: localStorage.getItem('ROOM_ID')
         });
         this.setState({message: ''});
@@ -50,11 +50,12 @@ class OneOnOne extends React.Component{
         <h1>バトル!!</h1>
         <div>
 
-        <input type="text" placeholder="Message" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
+        <input type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} className="form-control"/>
           <Link to="/Result">
             <button>終わり</button>
           </Link>
-          
+          <br/>
+          <button onClick={this.sendWord} >Send</button>
         </div>
       </div>
     );
