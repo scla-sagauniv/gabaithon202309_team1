@@ -30,14 +30,14 @@ io.on('connection', (socket) => {
     })
     socket.on('INTO_ROOM', function(data){
         if (temp_rooms.length == 0){
-            // room生成
-            //io2 = socket(server, socketOptions);
             // roomid生成
             let room_id = crypto.randomUUID();
             temp_rooms.push(room_id);
+            // room参加
             socket.join(room_id);
         } else {
             let room_id = temp_rooms.pop();
+            // room参加
             socket.join(room_id);
             // ROOMIDを同じ部屋にいる2人に送る
             io.to(room_id).emit('RECEIVE_ROOMID', {
