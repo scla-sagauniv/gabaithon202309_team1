@@ -8,7 +8,6 @@ function OneOnOne(){
 
   const [history, setHistory] = useState(init.history); // 履歴
   const [rules, setRules] = useState(init.rules); // ルール
-  const [player_id, setPlayerID] = useState();
   const [players, setPlayers] = useState(init.players); // 部屋にいるプレイヤーのID
   const [turn, setTurn] = useState(init.turn); // どちらのプレイヤーのターンか
   const [room_id, setRoomID] = useState(init.room_id); // 部屋のID
