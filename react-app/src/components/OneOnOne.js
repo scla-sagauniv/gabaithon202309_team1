@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import io from "socket.io-client";
+import './OneOnOne.css'
 import { useLocation } from 'react-router-dom';
 
 function OneOnOne(){
@@ -75,6 +76,23 @@ function OneOnOne(){
     <div>
       <h1>バトル!!</h1>
       <div>
+          <Link to="/Result">
+            <button>終わり</button>
+          </Link>
+          <br/>
+          <button onClick={this.sendWord} >Send</button>
+        <div className="my_area">
+          <div className="my_name">Player1</div>
+          <img className="my_char_img" src="./img/nigaoe_leibniz.png" prop="leibniz"></img>
+          <img className="my_hukidasi" src="./img/e1189_1.png"></img>
+          <input type="text" size="7" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} className="form-control"/>
+        </div>
+        <div className="ene_area">
+          <div className="ene_name">Player2</div>
+          <img className="ene_char_img" src="./img/nigaoe_leibniz.png" prop="leibniz"></img>
+          <img className="ene_hukidasi" src="./img/e1189_1.png"></img>
+          <div className="ene_text">3.ゴリラ</div>
+        </div>
         <input type="text" value={word} onChange={ev => setWord(ev.target.value)} placeholder="Message" />
         <br/>
         <button onClick={clickSend}>Send</button>
