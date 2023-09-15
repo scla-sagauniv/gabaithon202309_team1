@@ -45,6 +45,13 @@ class OneOnOne extends React.Component{
     }
   }
 
+  // Enterキーが押されたときにsendWordを呼び出す関数
+  handleKeyDown = (ev) => {
+    if (ev.key === 'Enter') {
+      this.sendWord(ev);
+    }
+  }
+
   render(){
     return (
       <div>
@@ -57,7 +64,7 @@ class OneOnOne extends React.Component{
           <div className="my_name">Player1</div>
           <img className="my_char_img" src="./img/nigaoe_leibniz.png" prop="leibniz"></img>
           <img className="my_hukidasi" src="./img/e1189_1.png"></img>
-          <input type="text" size="7" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} className="form-control"/>
+          <input type="text" size="7" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} onKeyDown={this.handleKeyDown} className="form-control"/>
         </div>
         <div className="ene_area">
           <div className="ene_name">Player2</div>
