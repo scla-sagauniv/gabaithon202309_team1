@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './SelectMode.css';
 
 // リンク先はあとで実装
-function SelectMode() {
+function SelectMode(props) {
 
   const navigate = useNavigate();
   const socket = io('localhost:8080', { withCredentials: true });
@@ -25,7 +25,7 @@ function SelectMode() {
         <p className="background_char">MODE</p>
       </div>
       <div className="cha_rectangle">
-        <img className="charImg" src="./img/nigaoe_leibniz.png"></img>
+        <img className="charImg" src={props.characterImage}></img>
       </div>
       <div>
         <Link to="/SelectCharacter">
