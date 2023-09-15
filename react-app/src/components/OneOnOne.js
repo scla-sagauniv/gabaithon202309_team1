@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import io from "socket.io-client";
-import { useLocation } from 'react-router-dom';
+import './OneOnOne.css'
+import { useLocation, Link } from 'react-router-dom';
 
 function OneOnOne(){
   const location = useLocation();
@@ -59,6 +60,7 @@ function OneOnOne(){
   });
 
   const clickSend = ev => {
+    console.log("test");
     if (turn == localStorage.getItem('player_id')){
       socket.emit('RECEIVE_WORD', {
         player_id: localStorage.getItem('player_id'),
@@ -69,12 +71,33 @@ function OneOnOne(){
       });
     }
   }
+
+  // Enterキーが押されたときにclickSendを呼び出す関数
+  const handleKeyDown = ev => {
+    if (ev.key === 'Enter') {
+      clickSend(ev);
+    }
+  }
   
   return (
     <div>
-      <h1>バトル!!</h1>
       <div>
-        <input type="text" value={word} onChange={ev => setWord(ev.target.value)} placeholder="Message" />
+          <Link to="/Result">
+            <button>終わり</button>
+          </Link>
+          <br/>
+        <div className="my_area">
+          <div className="my_name">Player1</div>
+          <img className="my_char_img" src="./img/nigaoe_leibniz.png" prop="leibniz"></img>
+          <img className="my_hukidasi" src="./img/e1189_1.png"></img>
+          <input type="text" size="7" placeholder="Message" value={word} onChange={ev => setWord(ev.target.value)} onKeyDown={handleKeyDown} className="form-control"/>
+        </div>
+        <div className="ene_area">
+          <div className="ene_name">Player2</div>
+          <img className="ene_char_img" src="./img/nigaoe_leibniz.png" prop="leibniz"></img>
+          <img className="ene_hukidasi" src="./img/e1189_1.png"></img>
+          <div className="ene_text">3.ゴリラ</div>
+        </div>
         <br/>
         <button onClick={clickSend}>Send</button>
       </div>

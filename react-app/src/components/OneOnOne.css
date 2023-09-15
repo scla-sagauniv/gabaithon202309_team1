@@ -1,0 +1,86 @@
+.my_area {
+    width: 614px;
+    height: 320px;
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    background-color: transparent;
+    position: absolute;
+    bottom: 0px;
+    right: 350px;
+}
+
+.ene_area {
+    width: 614px;
+    height: 320px;
+    border-bottom: 2px solid #000;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    background-color: transparent;
+    position: absolute;
+    top: 0px;
+    left: 350px;
+}
+
+.my_name {
+    font-size: 50px;
+    position: absolute;
+    bottom: 0px;
+    left: 30px;
+}
+
+.ene_name {
+    font-size: 50px;
+    position: absolute;
+    top: -10px;
+    left: 30px;
+}
+
+.my_char_img {
+    width : 280px;
+    height : 280px;
+    position: absolute;
+    left: -20px;
+}
+
+.ene_char_img {
+    width : 280px;
+    height : 280px;
+    position: absolute;
+    bottom: -10px;
+    left: -20px;
+}
+
+.my_hukidasi {
+    width : 330px;
+    height : 80px;
+    transform: scale(-1, 1);
+    position: absolute;
+    bottom: 180px;
+    left: 250px;
+}
+
+.ene_hukidasi {
+    width : 330px;
+    height : 80px;
+    transform: scale(-1, 1);
+    position: absolute;
+    bottom: 20px;
+    left: 250px;
+}
+
+.form-control {
+    font-size: 40px;
+    border: none;
+    outline: 0;
+    position: absolute;
+    bottom: 200px;
+    left: 300px;
+}
+
+.ene_text {
+    font-size: 50px;
+    position: absolute;
+    bottom: 20px;
+    left: 300px;
+}
