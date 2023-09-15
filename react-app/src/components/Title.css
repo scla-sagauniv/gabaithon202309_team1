@@ -1,7 +1,7 @@
 .title_rectangle {
     width: 300px;
     height: 300px;
-    border: 2px solid #000;
+    border: 10px solid #000;
     background-color: transparent;
     position: absolute;
     top: 100px;
@@ -10,24 +10,34 @@
 
 .title_str {
     text-align: center;
+    letter-spacing:0.22em;
     font-size : 50px;
+    font-weight:900;
+}
+
+.title_str2 {
+    text-align: center;
+    letter-spacing:0.1em;
+    font-size : 50px;
+    font-weight:900;
 }
 
 .title_eclipse {
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   background: transparent;/*背景色*/
-  border : 2px solid orange;
+  border : 7px solid orange;
   position :absolute;
-  top : 180px;
-  left : 193px;
+  top : 178px;
+  left : 196px;
 }
 
 .display_click {
     top : 450px;
     text-align: center;
     font-size : 50px;
+    font-weight:100;
     position: absolute;
     left : 300px;
 }

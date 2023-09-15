@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import io from "socket.io-client";
+import './OneOnOne.css';
 
 class OneOnOne extends React.Component{
   constructor(props){
@@ -38,6 +39,22 @@ class OneOnOne extends React.Component{
         this.setState({message: ''});
     }
 
+    this.addRule = ev => {
+      var newElement = document.createElement("p"); // p要素作成
+      var newContent = document.createTextNode("ルール1"); // テキストノードを作成
+      newElement.appendChild(newContent); // p要素にテキストノードを追加
+      newElement.setAttribute("id","child"); // p要素にidを設定
+      
+      // ----------------------------
+      // 親要素の最後の子要素を追加します
+      // ----------------------------
+      // 親要素（div）への参照を取得
+      var parentDiv = document.getElementById("rule-div");
+      
+      // 追加
+      parentDiv.appendChild(newElement);
+    }
+
     this.enterTheRoom = ev => {
         ev.preventDefault();
         this.socket.emit('INTO_ROOM');
@@ -46,10 +63,19 @@ class OneOnOne extends React.Component{
 
   render(){
     return (
-      <div>
-        <h1>バトル!!</h1>
-        <div>
+      <div className='oneonone_canvas'>
+       <p className="oneonone_rules">RULES</p>   
+        <div id="rule-div">
+        {/* <p className="child">RULE1</p> */}
+        </div>
 
+        <button onClick={this.addRule}>ルール追加</button>
+
+        <div>
+          <div className="oneonone_histryrectangle">
+            <p className="oneonone_histrys">HISTRY</p>
+            <p className="oneonone_histry">HISTRY1</p>
+          </div>
         <input type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} className="form-control"/>
           <Link to="/Result">
             <button>終わり</button>

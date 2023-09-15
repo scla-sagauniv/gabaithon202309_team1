@@ -22,7 +22,7 @@ function Title() {
       <div>
         <div className="title_rectangle">
           <p className="title_str">限界</p>
-          <p className="title_str">しりとり</p>
+          <p className="title_str2">しりとり</p>
           <div className="title_eclipse"></div>
         </div>
         <div>

@@ -1,0 +1,58 @@
+.oneonone_rules {
+    font-size: 96px;
+    font-weight:900;
+    transform: rotate( 10deg );
+    background-color: transparent;
+    position: absolute;
+    top: 5px;
+    user-select: none;
+}
+
+#child {
+    font-size: 48px;
+    font-weight:bold;
+    color:#fff;
+    transform: rotate( 10deg );
+    background-color: #222;
+    position: absolute;
+    top: 160px;
+    user-select: none;
+}
+
+.oneonone_histrys {
+    font-size: 64px;
+    font-weight:900;
+    background-color: #fff;
+    position: absolute;
+    top: -120px;
+    right: 75px;
+    user-select: none;
+}
+
+.oneonone_histry {
+    font-size: 48px;
+    font-weight:700;
+    position: absolute;
+    top: -20px;
+    right: 200px;
+    user-select: none;
+}
+
+.oneonone_histryrectangle {
+    width: 400px;
+    height: 1000px;
+    border: 10px solid #000;
+    background-color: transparent;
+    position: absolute;
+    top: 30px;
+    right: -60px;
+    user-select: none;
+}
+
+.oneonone_canvas {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: absolute;
+}
