@@ -20,16 +20,70 @@ const socketOptions = {
 function checkWord(word){
     return new Promise(resolve =>{
         axios.get("https://sakura-paris.org/dict/?api=1&q=" + word + "&dict=広辞苑&type=2").then(function(res){
-            console.log(res.data);
+            //console.log(res.data);
             resolve(!Array.isArray(res.data));
-            /*
-            if (res.data.length == 0){
-                resolve(false);
-            }
-            resolve(true);
-            */
         });
     })
+}
+
+// 以上か以下を確認する
+function checkWordSizeM(size, word){
+    if (size <= word.length){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkWordSizeB(size, word){
+    if (size >= word.length){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// 文字が正しく始まっているか判定する
+// 「ん」の判定もする
+function checkWordStartF(size, beforeword, currentword){
+    if (beforeword[size] === currentword[0]){
+        if (currentword[size] === 'ん'){
+            return false;
+        }
+        return true;
+    } else {
+        false;
+    }
+}
+
+function checkWordStartB(size, beforeword, currentword){
+    if (beforeword[(beforeword.length - 1) - size] === currentword[0]){
+        if (currentword[(beforeword.length - 1) - size] === 'ん'){
+            return false;
+        }
+        return true;
+    } else {
+        false;
+    }
+}
+
+function ruleChecker(rule, history, word){
+    console.log(rule);
+    console.log(history[history.length - 1]);
+    console.log(word);
+    if (rule.type == "backstart"){
+        return checkWordStartB(rule.size, history[history.length - 1], word);
+    }
+    if (rule.type == "frontstart"){
+        return checkWordStartF(rule.size, history[history.length - 1], word);
+    }
+    if (rule.type == "more"){
+        return checkWordSizeM(rule.size, word);
+    }
+    if (rule.type == "below"){
+        return checkWordSizeB(rule.size, word);
+    }
+    return true;
 }
 
 server = app.listen(8080, function(){
@@ -72,13 +126,27 @@ io.on('connection', (socket) => {
                 // room参加
                 socket.join(room_id);
                 // バトルの初期情報をまとめる
+                const rules = [
+                    {
+                        type: "backstart",
+                        size: 0
+                    },
+                    {
+                        type: "more",
+                        size: 3
+                    },
+                    // {
+                    //     type: "use",
+                    //     word: "あ"
+                    // }
+                ]
                 players = [queue.player_id, socket.id]
                 const battle_info = {
                     room_id: room_id,
                     players: players,
                     turn: players[Math.floor(Math.random() * 2)],
-                    history: [],
-                    rules: []
+                    history: ["しりとり"],
+                    rules: rules
                 }
                 // 部屋の移動
                 io.to(room_id).emit('MOVE_ROOM', battle_info);
@@ -91,7 +159,14 @@ io.on('connection', (socket) => {
     //dataの中にはplayerID, roomID, word, historyがある
     socket.on('RECEIVE_WORD', async function(data){
         console.log(data.word);
+        const rules = data.rules;
         let check = await checkWord(data.word);
+        for (let i = 0; i < rules.length; i++){
+            if (!ruleChecker(rules[i], data.history, data.word)){
+                check = false;
+                break;
+            }
+        }
         console.log(check);
         console.log(data.room_id);
         io.to(data.room_id).emit('SEND_JUDGE', {

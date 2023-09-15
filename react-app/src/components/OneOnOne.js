@@ -9,7 +9,6 @@ function OneOnOne(){
 
   const [history, setHistory] = useState(init.history); // 履歴
   const [rules, setRules] = useState(init.rules); // ルール
-  const [player_id, setPlayerID] = useState();
   const [players, setPlayers] = useState(init.players); // 部屋にいるプレイヤーのID
   const [turn, setTurn] = useState(init.turn); // どちらのプレイヤーのターンか
   const [room_id, setRoomID] = useState(init.room_id); // 部屋のID
@@ -44,6 +43,7 @@ function OneOnOne(){
     console.log(data);
     if (data.judge){
       setHistory([...history, data.word]);
+      setWord("");
       // turnの交代
       if (localStorage.getItem('player_id') == data.player_id){
         console.log("test1");
@@ -97,7 +97,7 @@ function OneOnOne(){
           <div className="ene_name">Player2</div>
           <img className="ene_char_img" src="./img/nigaoe_leibniz.png" prop="leibniz"></img>
           <img className="ene_hukidasi" src="./img/e1189_1.png"></img>
-          <div className="ene_text">3.ゴリラ</div>
+          <div className="ene_text">{history[history.length - 1]}</div>
         </div>
         <br/>
         <button onClick={clickSend}>Send</button>
