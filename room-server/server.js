@@ -21,7 +21,6 @@ function checkWord(word){
     return new Promise(resolve =>{
         axios.get("https://sakura-paris.org/dict/?api=1&q=" + word + "&dict=広辞苑&type=2").then(function(res){
             console.log(res.data);
-            console.log(res.data.length);
             resolve(!Array.isArray(res.data));
             /*
             if (res.data.length == 0){
@@ -74,25 +73,35 @@ io.on('connection', (socket) => {
                 socket.join(room_id);
                 // バトルの初期情報をまとめる
                 players = [queue.player_id, socket.id]
-                let battle_info = {
+                const battle_info = {
                     room_id: room_id,
                     players: players,
                     turn: players[Math.floor(Math.random() * 2)],
+                    history: [],
                     rules: []
                 }
-                // 情報を送る
-                io.to(room_id).emit('SEND_BATTLE_INFO', battle_info);
                 // 部屋の移動
-                io.to(room_id).emit('MOVE_ROOM', {
-                    room_id: room_id
-                })
+                io.to(room_id).emit('MOVE_ROOM', battle_info);
+                console.log(room_id);
+                // 情報を送る
+                //io.to(room_id).emit('SEND_BATTLE_INFO', battle_info);
             } 
         }
     })
-    //dataの中にはplayerID, roomID, wordがある
-    socket.on('SEND_WORD', async function(data){
+    //dataの中にはplayerID, roomID, word, historyがある
+    socket.on('RECEIVE_WORD', async function(data){
         console.log(data.word);
         let check = await checkWord(data.word);
-        await console.log(check);
+        console.log(check);
+        console.log(data.room_id);
+        io.to(data.room_id).emit('SEND_JUDGE', {
+            judge: check,
+            word: data.word,
+            player_id: data.player_id
+        });
     })
+
+    socket.on('JOIN_ROOM', function(data){
+        socket.join(data.room_id);
+    });
 });

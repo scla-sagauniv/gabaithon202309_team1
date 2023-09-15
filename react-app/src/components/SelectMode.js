@@ -10,11 +10,13 @@ function SelectMode(props) {
   const socket = io('localhost:8080', { withCredentials: true });
 
   socket.on("MOVE_ROOM", function(data){
-    navigate("/OneOnOne");
+    //console.log(data);
+    navigate("/OneOnOne", {state: data});
   });
 
   const clickOneOnOne = ev => {
     socket.emit('SERTCH_ROOM');
+    localStorage.setItem('player_id', socket.id);
   }
 
   return (
