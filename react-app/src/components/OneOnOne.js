@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import io from "socket.io-client";
+import './OneOnOne.css'
 
 class OneOnOne extends React.Component{
   constructor(props){
@@ -47,15 +48,22 @@ class OneOnOne extends React.Component{
   render(){
     return (
       <div>
-        <h1>バトル!!</h1>
-        <div>
-
-        <input type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} className="form-control"/>
           <Link to="/Result">
             <button>終わり</button>
           </Link>
           <br/>
           <button onClick={this.sendWord} >Send</button>
+        <div className="my_area">
+          <div className="my_name">Player1</div>
+          <img className="my_char_img" src="./img/nigaoe_leibniz.png" prop="leibniz"></img>
+          <img className="my_hukidasi" src="./img/e1189_1.png"></img>
+          <input type="text" size="7" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} className="form-control"/>
+        </div>
+        <div className="ene_area">
+          <div className="ene_name">Player2</div>
+          <img className="ene_char_img" src="./img/nigaoe_leibniz.png" prop="leibniz"></img>
+          <img className="ene_hukidasi" src="./img/e1189_1.png"></img>
+          <div className="ene_text">3.ゴリラ</div>
         </div>
       </div>
     );
